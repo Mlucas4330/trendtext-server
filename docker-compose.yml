@@ -1,0 +1,22 @@
+services:
+  mysql:
+    image: mysql:latest
+    restart: always
+    volumes:
+      - mysql_data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+      - MYSQL_DATABASE=${DATABASE}
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+    ports:
+      - 3306:3306
+  server:
+    build: .
+    restart: always
+    ports:
+      - 3000:3000
+    depends_on:
+      - mysql
+volumes:
+  mysql_data:
