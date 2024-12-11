@@ -22,14 +22,6 @@ services:
     depends_on:
       mysql:
         condition: service_healthy
-  certbot:
-    image: certbot/certbot:latest
-    volumes:
-      - ./certbot/www/:/var/www/certbot/:rw
-      - ./certbot/conf/:/etc/letsencrypt/:rw
-    command: certonly --webroot -w /var/www/certbot -d $BASE_URL --agree-tos --email $CERT_EMAIL
-    depends_on:
-      - server
   nginx:
     container_name: nginx
     image: nginx:latest
@@ -41,6 +33,12 @@ services:
       - 80:80
       - 443:443
     depends_on:
-      - certbot
+      - server
+  certbot:
+    image: certbot/certbot:latest
+    volumes:
+      - ./certbot/www/:/var/www/certbot/:rw
+      - ./certbot/conf/:/etc/letsencrypt/:rw
+    command: certonly --webroot -w /var/www/certbot -d $BASE_URL --agree-tos --email $CERT_EMAIL --non-interactive
 volumes:
   mysql_data:
