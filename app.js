@@ -24,8 +24,8 @@ const main = async () => {
 
         if(env.node_env === 'production'){
             const options = {
-                key: readFileSync('/etc/letsencrypt/live/api.trendtext.com.br/privkey.pem'),
-                cert: readFileSync('/etc/letsencrypt/live/api.trendtext.com.br/fullchain.pem')
+                key: readFileSync('/etc/letsencrypt/live/*/privkey.pem'),
+                cert: readFileSync('/etc/letsencrypt/live/*/fullchain.pem')
             };
     
             const https = createServer(options, app);

@@ -24,7 +24,7 @@ services:
     volumes:
       - ./certbot/www:/var/www/certbot:rw
       - ./certbot/conf:/etc/letsencrypt:rw
-    command: certbot renew --webroot -w /var/www/certbot --quiet
+    command: certonly --webroot --webroot-path=/var/www/certbot --email $CERTBOT_EMAIL --agree-tos --no-eff-email -d api.trendtext.com.br -d www.api.trendtext.com.br
     entrypoint: /bin/sh -c "trap exit TERM; while :; do certbot renew --webroot -w /var/www/certbot --quiet; sleep 12h & wait $!; done"
     depends_on:
       - app
