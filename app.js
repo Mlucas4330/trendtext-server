@@ -18,7 +18,7 @@ const main = async () => {
 
         app.use(json())
         app.use(cookieParser())
-        app.use('/api', router)
+        app.use(router)
 
         app.listen(env.port, () => {
             console.log(`Server running on: ${env.base_url}`)
