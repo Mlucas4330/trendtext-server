@@ -12,8 +12,5 @@ export const database = new DataSource({
     username: env.db_user,
     password: env.db_password,
     database: env.db_name,
-    entities: [User, UserCredityPayment, UserVideo],
-    synchronize: env.node_env !== 'production',
-    logging: env.node_env !== 'production',
-    logger: env.node_env !== 'production'
+    entities: [User, UserCredityPayment, UserVideo]
 })

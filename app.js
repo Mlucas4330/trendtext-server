@@ -4,8 +4,6 @@ import { env } from './src/env.js'
 import router from './src/router.js'
 import cookieParser from 'cookie-parser'
 import { database } from './src/datatabase.js'
-import { readFileSync } from 'fs'
-import { createServer } from 'https'
 
 const main = async () => {
     try {
@@ -22,22 +20,9 @@ const main = async () => {
         app.use(cookieParser())
         app.use(router)
 
-        if (env.node_env === 'production') {
-            const options = {
-                key: readFileSync('/etc/letsencrypt/live/*/privkey.pem'),
-                cert: readFileSync('/etc/letsencrypt/live/*/fullchain.pem')
-            };
-
-            const https = createServer(options, app);
-
-            https.listen(env.port, () => {
-                console.log(`Server running on: ${env.base_url}`);
-            });
-        } else {
-            app.listen(env.port, () => {
-                console.log(`Server running on: ${env.base_url}`)
-            })
-        }
+        app.listen(env.port, () => {
+            console.log(`Server running on: ${env.base_url}`)
+        })
     } catch (err) {
         console.error(err.message)
     }

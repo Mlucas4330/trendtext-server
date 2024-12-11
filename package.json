@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "nodemon app.js",
     "start": "node app.js",
+    "migrations:generate": "typeorm -d src/database.js migration:generate src/migrations/default -o",
+    "migrations:run": "typeorm migration:run -d src/database.js",
     "lint": "npx eslint . --fix"
   },
   "dependencies": {
