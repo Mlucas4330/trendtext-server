@@ -9,13 +9,6 @@ services:
       - MYSQL_DATABASE=${DB_NAME}
     ports:
       - 3306:3306
-  certbot:
-    container_name: certbot
-    image: certbot/certbot:latest
-    volumes:
-      - ./certbot/www:/var/www/certbot:rw
-      - ./certbot/conf:/etc/letsencrypt:rw
-    command: certonly --webroot --webroot-path=/var/www/certbot --email $CERTBOT_EMAIL --agree-tos --no-eff-email -d api.trendtext.com.br
   server:
     container_name: server
     build: .
@@ -24,5 +17,15 @@ services:
     depends_on:
       mysql:
         condition: service_completed_successfully
+  certbot:
+    container_name: certbot
+    image: certbot/certbot:latest
+    volumes:
+      - ./certbot/www:/var/www/certbot:rw
+      - ./certbot/conf:/etc/letsencrypt:rw
+    command: certonly --webroot --webroot-path=/var/www/certbot --email $CERTBOT_EMAIL --agree-tos --no-eff-email -d api.trendtext.com.br
+    depends_on:
+      server:
+        condition: service_started
 volumes:
   mysql_data:
