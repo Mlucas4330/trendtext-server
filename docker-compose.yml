@@ -1,5 +1,6 @@
 services:
   mysql:
+    container_name: mysql
     image: mysql:latest
     volumes:
       - mysql_data:/var/lib/mysql
@@ -13,6 +14,7 @@ services:
       interval: 5s
       retries: 5
   app:
+    container_name: server
     build: .
     ports:
       - 3000:3000
@@ -20,11 +22,14 @@ services:
       mysql:
         condition: service_healthy
   certbot:
+    container_name: certbot
     image: certbot/certbot:latest
     volumes:
       - ./certbot/www:/var/www/certbot:rw
       - ./certbot/conf:/etc/letsencrypt:rw
-    command: certonly --webroot --webroot-path=/var/www/certbot --email $CERTBOT_EMAIL --agree-tos --no-eff-email -d api.trendtext.com.br -d www.api.trendtext.com.br
+    environment:
+      - CERTBOT_EMAIL=${CERTBOT_EMAIL}
+    command: certonly --webroot --webroot-path=/var/www/certbot --email $CERTBOT_EMAIL --agree-tos --no-eff-email -d api.trendtext.com.br
     entrypoint: /bin/sh -c "trap exit TERM; while :; do certbot renew --webroot -w /var/www/certbot --quiet; sleep 12h & wait $!; done"
     depends_on:
       - app
