@@ -14,5 +14,6 @@ export const database = new DataSource({
     database: env.db_name,
     entities: [User, UserCredityPayment, UserVideo],
     synchronize: env.node_env === 'development' ? true : false,
-    logging: env.node_env === 'development' ? true : false
+    logging: env.node_env === 'development' ? true : false,
+    logger: env.node_env === 'development' ? true : false
 })
