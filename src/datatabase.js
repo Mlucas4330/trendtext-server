@@ -7,11 +7,11 @@ import 'reflect-metadata'
 
 export const database = new DataSource({
     type: 'mysql',
-    host: env.host,
+    host: env.db_host,
     port: env.db_port,
-    username: env.user,
-    password: env.password,
-    database: env.database,
+    username: env.db_user,
+    password: env.db_password,
+    database: env.db_name,
     entities: [User, UserCredityPayment, UserVideo],
     synchronize: env.node_env === 'development' ? true : false,
     logging: env.node_env === 'development' ? true : false

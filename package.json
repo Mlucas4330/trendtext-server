@@ -5,10 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon app.js",
-    "list": "pm2 list",
-    "stop": "pm2 stop app",
-    "start": "pm2 start app.js",
-    "logs": "pm2 logs",
+    "start": "node app.js",
     "lint": "npx eslint . --fix"
   },
   "dependencies": {
@@ -22,7 +19,6 @@
     "mercadopago": "^2.1.0",
     "mysql2": "^3.11.4",
     "openai": "^4.76.0",
-    "pm2": "^5.4.3",
     "reflect-metadata": "^0.2.2",
     "typeorm": "^0.3.20"
   },
