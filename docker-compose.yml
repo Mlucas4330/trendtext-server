@@ -28,6 +28,8 @@ services:
       - ./certbot/www/:/var/www/certbot/:rw
       - ./certbot/conf/:/etc/letsencrypt/:rw
     command: certbot certonly --webroot -w /var/www/certbot -d $BASE_URL --agree-tos --email $CERT_EMAIL
+    depends_on:
+      - server
   nginx:
     container_name: nginx
     image: nginx:latest
@@ -39,6 +41,6 @@ services:
       - 80:80
       - 443:443
     depends_on:
-      - server
+      - certbot
 volumes:
   mysql_data:
