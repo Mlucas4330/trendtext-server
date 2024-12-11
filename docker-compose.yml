@@ -9,6 +9,11 @@ services:
       - MYSQL_DATABASE=${DB_NAME}
     ports:
       - 3306:3306
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
   server:
     container_name: server
     build: .
@@ -16,7 +21,7 @@ services:
       - 3000:3000
     depends_on:
       mysql:
-        condition: service_completed_successfully
+        condition: service_healthy
   certbot:
     container_name: certbot
     image: certbot/certbot:latest
