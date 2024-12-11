@@ -16,14 +16,9 @@ services:
       retries: 3
   server:
     container_name: server
-    image: mlucas4330/node-server:1.0
+    build: .
     ports:
       - 3000:3000
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://server:3000"]
-      interval: 10s
-      timeout: 5s
-      retries: 3
     depends_on:
       mysql:
         condition: service_healthy
@@ -35,7 +30,6 @@ services:
       - ./certbot/conf:/etc/letsencrypt:rw
     command: certonly --webroot --webroot-path=/var/www/certbot --email $CERTBOT_EMAIL --agree-tos --no-eff-email -d api.trendtext.com.br
     depends_on:
-      server:
-        condition: service_healthy
+      - server
 volumes:
   mysql_data:

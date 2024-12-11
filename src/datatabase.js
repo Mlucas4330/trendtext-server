@@ -13,7 +13,7 @@ export const database = new DataSource({
     password: env.db_password,
     database: env.db_name,
     entities: [User, UserCredityPayment, UserVideo],
-    synchronize: env.node_env === 'development' ? true : false,
-    logging: env.node_env === 'development' ? true : false,
-    logger: env.node_env === 'development' ? true : false
+    synchronize: env.node_env !== 'production',
+    logging: env.node_env !== 'production',
+    logger: env.node_env !== 'production'
 })

@@ -22,14 +22,14 @@ const main = async () => {
         app.use(cookieParser())
         app.use(router)
 
-        if(env.node_env === 'production'){
+        if (env.node_env === 'production') {
             const options = {
                 key: readFileSync('/etc/letsencrypt/live/*/privkey.pem'),
                 cert: readFileSync('/etc/letsencrypt/live/*/fullchain.pem')
             };
-    
+
             const https = createServer(options, app);
-    
+
             https.listen(env.port, () => {
                 console.log(`Server running on: ${env.base_url}`);
             });
