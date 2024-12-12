@@ -1,6 +1,6 @@
-import Joi from 'joi'
+const Joi = require('joi')
 
-export const userSchema = Joi.object({
+const userSchema = Joi.object({
     username: Joi.string().min(3).max(30).required().messages({
         'string.min': 'O nome deve ter pelo menos 3 caracteres',
         'string.max': 'O nome deve ter no máximo 30 caracteres',
@@ -18,3 +18,7 @@ export const userSchema = Joi.object({
         'any.required': 'A senha é obrigatória'
     })
 })
+
+module.exports = {
+    userSchema
+}

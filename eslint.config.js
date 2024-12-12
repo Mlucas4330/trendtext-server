@@ -1,9 +1,11 @@
-import globals from 'globals'
+const globals = require('globals')
 
-
-/** @type {import('eslint').Linter.Config[]} */
-export default [
-  { languageOptions: { globals: globals.browser } },
+module.exports = [
+  {
+    languageOptions: {
+      globals: globals.browser
+    }
+  },
   {
     rules: {
       'quotes': ['error', 'single', { 'allowTemplateLiterals': true }],

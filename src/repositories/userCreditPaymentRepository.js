@@ -1,4 +1,8 @@
-import { database } from '../database.js'
-import { UserCredityPayment } from '../entities/userCreditPaymentEntity.js'
+const { database } = require('../database')
+const { UserCredityPayment } = require('../entities/userCreditPaymentEntity')
 
-export const userCreditPaymentRepository = database.getRepository(UserCredityPayment)
+const userCreditPaymentRepository = database.getRepository(UserCredityPayment)
+
+module.exports = {
+    userCreditPaymentRepository
+}

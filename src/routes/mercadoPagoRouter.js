@@ -1,6 +1,6 @@
-import { Router } from 'express'
-import { createPreference, feedback, getCreditPayments } from '../controllers/mercadoPagoController.js'
-import { authenticateMiddleware } from '../middlewares/authenticateMiddleware.js'
+const { Router } = require('express')
+const { createPreference, feedback, getCreditPayments } = require('../controllers/mercadoPagoController')
+const { authenticateMiddleware } = require('../middlewares/authenticateMiddleware')
 
 const mercadoPagoRouter = Router()
 
@@ -8,4 +8,6 @@ mercadoPagoRouter.post('/preference', authenticateMiddleware, (req, res) => crea
 mercadoPagoRouter.get('/feedback', (req, res) => feedback(req, res))
 mercadoPagoRouter.get('/credit-payments', authenticateMiddleware, (req, res) => getCreditPayments(req, res))
 
-export default mercadoPagoRouter
+module.exports = {
+    mercadoPagoRouter
+}

@@ -1,8 +1,7 @@
-import OpenAI from 'openai'
-import { env } from '../env.js'
-import { userRepository } from '../repositories/userRepository.js'
+const OpenAI = require('openai')
+const { env } = require('../env')
 
-export const assistant = async (req, res) => {
+const assistant = async (req, res) => {
     try {
         const { niche } = req.body
 
@@ -46,4 +45,8 @@ export const assistant = async (req, res) => {
         console.log(err.message)
         res.status(500).json('Erro interno de servidor')
     }
+}
+
+module.exports = {
+    assistant
 }

@@ -1,4 +1,8 @@
-import { database } from '../database.js'
-import { User } from '../entities/userEntity.js'
+const { database } = require('../database')
+const { User } = require('../entities/userEntity')
 
-export const userRepository = database.getRepository(User)
+const userRepository = database.getRepository(User)
+
+module.exports = {
+    userRepository
+}

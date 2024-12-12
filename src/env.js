@@ -1,8 +1,8 @@
-import dotenv from 'dotenv'
+const dotenv = require('dotenv')
 
 dotenv.config()
 
-export const env = {
+const env = {
     port: process.env.PORT,
     db_port: process.env.DB_PORT,
     db_host: process.env.DB_HOST,
@@ -16,4 +16,8 @@ export const env = {
     base_url: process.env.BASE_URL,
     openai_api_key: process.env.OPENAI_API_KEY,
     assistant_id: process.env.OPENAI_ASSISTANT_ID
+}
+
+module.exports = {
+    env
 }

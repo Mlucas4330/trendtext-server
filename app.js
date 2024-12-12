@@ -1,9 +1,10 @@
-import express, { json } from 'express'
-import cors from 'cors'
-import { env } from './src/env.js'
-import router from './src/router.js'
-import cookieParser from 'cookie-parser'
-import { database } from './src/database.js'
+const express = require('express')
+const { json } = require('express')
+const cors = require('cors')
+const { env } = require('./src/env')
+const { router } = require('./src/router')
+const cookieParser = require('cookie-parser')
+const { database } = require('./src/database')
 
 const main = async () => {
     try {

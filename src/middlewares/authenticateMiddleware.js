@@ -1,7 +1,7 @@
-import jwt from 'jsonwebtoken'
-import { env } from '../env.js'
+const jwt = require('jsonwebtoken')
+const { env } = require('../env')
 
-export const authenticateMiddleware = (req, res, next) => {
+const authenticateMiddleware = (req, res, next) => {
     try {
         const token = req.cookies.token
 
@@ -18,4 +18,8 @@ export const authenticateMiddleware = (req, res, next) => {
         console.error(err.message)
         return res.status(401).send('Token inválido!')
     }
+}
+
+module.exports = {
+    authenticateMiddleware
 }

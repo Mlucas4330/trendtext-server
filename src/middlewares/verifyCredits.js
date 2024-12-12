@@ -1,6 +1,6 @@
-import { userRepository } from '../repositories/userRepository.js'
+const { userRepository } = require('../repositories/userRepository')
 
-export const verifyCredits = async (req, res, next) => {
+verifyCredits = async (req, res, next) => {
     const user = await userRepository.findOne({
         where: {
             id: req.user.id
@@ -12,4 +12,8 @@ export const verifyCredits = async (req, res, next) => {
     }
 
     next()
+}
+
+module.exports = {
+    verifyCredits
 }

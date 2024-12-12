@@ -2,11 +2,11 @@
   "name": "trendtext-server",
   "private": false,
   "version": "0.0.0",
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
     "dev": "nodemon app.js",
     "start": "node app.js",
-    "migrations:generate": "typeorm -d src/database.js migration:generate src/migrations/default -o",
+    "migrations:generate": "typeorm migration:generate -d src/database.js -o src/migrations/default",
     "migrations:run": "typeorm migration:run -d src/database.js",
     "lint": "npx eslint . --fix"
   },

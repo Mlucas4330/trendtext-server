@@ -1,10 +1,10 @@
-import bcrypt from 'bcryptjs'
-import { env } from '../env.js'
-import jwt from 'jsonwebtoken'
-import { userRepository } from '../repositories/userRepository.js'
-import { userSchema } from '../schemas/userSchema.js'
+const bcrypt = require('bcryptjs')
+const { env } = require('../env')
+const jwt = require('jsonwebtoken')
+const { userRepository } = require('../repositories/userRepository')
+const { userSchema } = require('../schemas/userSchema')
 
-export const signIn = async (req, res) => {
+const signIn = async (req, res) => {
     try {
         const { email, password } = req.body
 
@@ -53,7 +53,7 @@ export const signIn = async (req, res) => {
     }
 }
 
-export const signUp = async (req, res) => {
+const signUp = async (req, res) => {
     try {
         const { username, email, password } = req.body
 
@@ -92,7 +92,7 @@ export const signUp = async (req, res) => {
     }
 }
 
-export const decrementCredits = async (req, res) => {
+const decrementCredits = async (req, res) => {
     try {
         const { value } = req.body
 
@@ -109,4 +109,10 @@ export const decrementCredits = async (req, res) => {
         console.error('Erro na diminuição dos créditos: ' + err.message)
         res.status(500).json('Erro interno de servidor!')
     }
+}
+
+module.exports = {
+    signIn,
+    signUp,
+    decrementCredits
 }

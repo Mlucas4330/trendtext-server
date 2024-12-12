@@ -1,8 +1,8 @@
-import { MercadoPagoConfig, Preference } from 'mercadopago'
-import { env } from '../env.js'
-import { userCreditPaymentRepository } from '../repositories/userCreditPaymentRepository.js'
+const { MercadoPagoConfig, Preference } = require('mercadopago')
+const { env } = require('../env')
+const { userCreditPaymentRepository } = require('../repositories/userCreditPaymentRepository')
 
-export const createPreference = async (req, res) => {
+const createPreference = async (req, res) => {
     try {
         const { title, quantity, unit_price } = req.body
 
@@ -52,7 +52,7 @@ export const createPreference = async (req, res) => {
     }
 }
 
-export const feedback = async (req, res) => {
+const feedback = async (req, res) => {
     try {
         const client = new MercadoPagoConfig({ accessToken: env.access_token })
 
@@ -86,7 +86,7 @@ export const feedback = async (req, res) => {
     }
 }
 
-export const getCreditPayments = async (req, res) => {
+const getCreditPayments = async (req, res) => {
     try {
         const result = await userCreditPaymentRepository.find({
             where: {
@@ -101,4 +101,10 @@ export const getCreditPayments = async (req, res) => {
         console.error('Erro na busca do histórico de pagamentos: ' + err.message)
         res.status(500).json('Erro interno de servidor')
     }
+}
+
+module.exports = {
+    createPreference,
+    feedback,
+    getCreditPayments
 }

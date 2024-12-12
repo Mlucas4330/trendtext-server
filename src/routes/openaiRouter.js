@@ -1,10 +1,12 @@
-import { Router } from 'express'
-import { assistant } from '../controllers/openaiController.js'
-import { authenticateMiddleware } from '../middlewares/authenticateMiddleware.js'
-import { verifyCredits } from '../middlewares/verifyCredits.js'
+const { Router } = require('express')
+const { assistant } = require('../controllers/openaiController')
+const { authenticateMiddleware } = require('../middlewares/authenticateMiddleware')
+const { verifyCredits } = require('../middlewares/verifyCredits')
 
 const openaiRouter = Router()
 
 openaiRouter.post('/assistant', [authenticateMiddleware, verifyCredits], (req, res, next) => assistant(req, res, next))
 
-export default openaiRouter
+module.exports = {
+    openaiRouter
+}
