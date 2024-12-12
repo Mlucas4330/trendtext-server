@@ -34,12 +34,12 @@ services:
       - 443:443
     depends_on:
       - server
-  # certbot:
-  #   container_name: certbot
-  #   image: certbot/certbot:latest
-  #   volumes:
-  #     - ./certbot/www/:/var/www/certbot/:rw
-  #     - ./certbot/conf/:/etc/letsencrypt/:rw
-  #   command: certonly --webroot -w /var/www/certbot -d $BASE_URL --agree-tos --email $CERT_EMAIL --non-interactive
+  certbot:
+    container_name: certbot
+    image: certbot/certbot:latest
+    volumes:
+      - ./certbot/www/:/var/www/certbot/:rw
+      - ./certbot/conf/:/etc/letsencrypt/:rw
+    command: certonly --webroot -w /var/www/certbot -d $BASE_URL --agree-tos --email $CERT_EMAIL --non-interactive
 volumes:
   mysql_data:
