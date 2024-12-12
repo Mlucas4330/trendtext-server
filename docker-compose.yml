@@ -27,17 +27,17 @@ services:
     image: nginx:latest
     volumes:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
-      - ./certbot/www/:/var/www/certbot/:rw
-      - ./certbot/conf/:/etc/nginx/ssl/:rw
+      - ./certbot/www/:/var/www/certbot/:ro
+      - ./certbot/conf/:/etc/nginx/ssl/:ro
     ports:
       - 80:80
       - 443:443
-  certbot:
-    container_name: certbot
-    image: certbot/certbot:latest
-    volumes:
-      - ./certbot/www/:/var/www/certbot/:rw
-      - ./certbot/conf/:/etc/letsencrypt/:rw
-    command: certonly --webroot -w /var/www/certbot -d $BASE_URL --agree-tos --email $CERT_EMAIL --non-interactive --dry-run
+  # certbot:
+  #   container_name: certbot
+  #   image: certbot/certbot:latest
+  #   volumes:
+  #     - ./certbot/www/:/var/www/certbot/:rw
+  #     - ./certbot/conf/:/etc/letsencrypt/:rw
+  #   command: certonly --webroot -w /var/www/certbot -d $BASE_URL --agree-tos --email $CERT_EMAIL --non-interactive
 volumes:
   mysql_data:
