@@ -14,8 +14,8 @@ export const authenticateMiddleware = (req, res, next) => {
         req.user = decodedUser
 
         next()
-    } catch (error) {
-        console.log(error.message)
+    } catch (err) {
+        console.error(err.message)
         return res.status(401).send('Token inválido!')
     }
 }
