@@ -32,16 +32,12 @@ services:
     ports:
       - 80:80
       - 443:443
-    depends_on:
-      - server
   certbot:
     container_name: certbot
     image: certbot/certbot:latest
     volumes:
       - ./certbot/www/:/var/www/certbot/:rw
       - ./certbot/conf/:/etc/letsencrypt/:rw
-    command: certonly --webroot -w /var/www/certbot -d $BASE_URL --agree-tos --email $CERT_EMAIL --non-interactive
-    depends_on:
-      - nginx
+    command: certonly --webroot -w /var/www/certbot -d $BASE_URL --agree-tos --email $CERT_EMAIL --non-interactive --dry-run
 volumes:
   mysql_data:
