@@ -29,6 +29,8 @@ services:
       - ./certbot/conf/:/etc/nginx/ssl/:ro
     ports:
       - 80:80
+    expose:
+      - 443
     depends_on:
       - server
   certbot:
