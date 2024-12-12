@@ -1,6 +1,3 @@
-import { User } from './entities/userEntity.js'
-import { UserCredityPayment } from './entities/userCreditPaymentEntity.js'
-import { UserVideo } from './entities/userVideoEntity.js'
 import { env } from './env.js'
 import { DataSource } from 'typeorm'
 import 'reflect-metadata'
@@ -12,5 +9,6 @@ export const database = new DataSource({
     username: env.db_user,
     password: env.db_password,
     database: env.db_name,
-    entities: [User, UserCredityPayment, UserVideo]
+    entities: ['./src/entities/*.js'],
+    migrations: ['./src/migrations/*.js']
 })

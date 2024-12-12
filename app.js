@@ -3,7 +3,7 @@ import cors from 'cors'
 import { env } from './src/env.js'
 import router from './src/router.js'
 import cookieParser from 'cookie-parser'
-import { database } from './src/datatabase.js'
+import { database } from './src/database.js'
 
 const main = async () => {
     try {
